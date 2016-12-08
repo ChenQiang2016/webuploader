@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/webuploader.css">
+</head>
+<body>
+<div id="uploader" class="wu-example">
+
+    <div>
+        <div id="temp">选择图片</div>
+        <div id="tempValue"></div>
+    </div>
+
+
+</div>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/webuploader.js"></script>
+<script type="text/javascript">
+    $(function () {
+        upload();
+
+        function upload() {
+            var uploader = WebUploader.create({
+                auto: true,
+                swf: 'js/Uploader.swf',
+                server: 'http://www.qiangchen.me/enms/file/upload',
+                pick:'#temp',
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                },
+                resize: false,
+                fileSingleSizeLimit : 10 * 1024 * 1024
+            });
+            uploader.on('uploadSuccess', function (file, response) {
+                var html = '<img src="'+response.data+'"/>';
+                $('#tempValue').html(html);
+            });
+        }
+    });
+</script>
+</body>
+</html>
